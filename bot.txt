@@ -1,0 +1,30 @@
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import logging
+
+# Настройка логирования
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Вставьте ваш токен сюда
+TOKEN = '7030151245:AAHOD3W0jea7nsn-R7gclNpKk_1Aacxi5Sg'
+
+def start(update, context):
+    """Обработчик команды /start"""
+    update.message.reply_text('Привет! Я бот для управления задачами.')
+
+def main():
+    """Основная функция бота"""
+    updater = Updater(TOKEN, use_context=True)
+    
+    # Добавляем обработчики команд
+    dp = updater.dispatcher
+    
+    dp.add_handler(CommandHandler("start", start))
+    
+    # Запускаем бота
+    updater.start_polling()
+    logger.info("Бот запущен!")
+    updater.idle()
+
+if __name__ == '__main__':
+    main()
